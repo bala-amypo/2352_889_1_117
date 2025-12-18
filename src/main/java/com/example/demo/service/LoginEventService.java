@@ -4,8 +4,11 @@ package com.example.demo.service;
 import com.example.demo.entity.LoginEvent;
 import com.example.demo.repository.LoginEventRepository;
 import com.example.demo.util.RuleEvaluationUtil;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service   // ⭐ VERY IMPORTANT
 public class LoginEventService {
 
     private final LoginEventRepository repo;
