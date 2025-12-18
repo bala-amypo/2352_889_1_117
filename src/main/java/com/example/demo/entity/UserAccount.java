@@ -13,6 +13,6 @@ public class UserAccount{
     private String AUDITOR;
     private String ACTIVE;
     private String SUSPENDED;
-    private LocalDateTime;
+    private LocalDateTime  createdAt;
 
 }
