@@ -26,5 +26,5 @@ public class UserAccount {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // getters & setters
+
 }
