@@ -19,4 +19,11 @@ public class ViolationRecord {
     private String severity;
     private Boolean resolved = false;
     private LocalDateTime detectedAt = LocalDateTime.now();
+
+    public void setUserId(Long userId) { this.userId = userId; }
+    public void setPolicyRuleId(Long policyRuleId) { this.policyRuleId = policyRuleId; }
+    public void setEventId(Long eventId) { this.eventId = eventId; }
+    public void setViolationType(String violationType) { this.violationType = violationType; }
+    public void setDetails(String details) { this.details = details; }
+    public void setSeverity(String severity) { this.severity = severity; }
 }
