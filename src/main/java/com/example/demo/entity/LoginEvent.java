@@ -8,7 +8,8 @@ public class LoginEvent{
     private String location;
     private String deviceld;
     private LocalDateTime timestamp;
-    
+    private String SUCCESS;
+    private String FAILED;
 
     
 }
