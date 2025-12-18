@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/logins")
 public class LoginEventController {
@@ -19,11 +20,11 @@ public class LoginEventController {
 
     @PostMapping("/record")
     public LoginEvent record(@RequestBody LoginEvent event) {
-        return service.recordLogin(event);
+        return service.record(event);
     }
 
     @GetMapping("/suspicious/{userId}")
     public List<LoginEvent> suspicious(@PathVariable Long userId) {
-        return service.getSuspiciousLogins(userId);
+        return service.suspicious(userId);
     }
 }

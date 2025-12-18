@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service   // ⭐ VERY IMPORTANT
+@Service
 public class LoginEventService {
 
     private final LoginEventRepository repo;
@@ -20,17 +20,13 @@ public class LoginEventService {
         this.util = util;
     }
 
-    public LoginEvent recordLogin(LoginEvent event) {
+    public LoginEvent record(LoginEvent event) {
         LoginEvent saved = repo.save(event);
-        util.evaluateLoginEvent(saved);
+        util.evaluate(saved);
         return saved;
     }
 
-    public List<LoginEvent> getSuspiciousLogins(Long userId) {
+    public List<LoginEvent> suspicious(Long userId) {
         return repo.findByUserIdAndLoginStatus(userId, "FAILED");
-    }
-
-    public List<LoginEvent> getAllEvents() {
-        return repo.findAll();
     }
 }
