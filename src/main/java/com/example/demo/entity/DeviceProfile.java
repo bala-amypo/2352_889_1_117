@@ -1,11 +1,20 @@
 
 package com.example.demo.entity;
 
-public class DeviceProfile{
-    private Long id;
-    private String employeeld;
-    private String username;
-    private String email;
-    private String password
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
+@Entity
+public class DeviceProfile {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long userId;
+    private String deviceId;
+    private String deviceType;
+    private String osVersion;
+    private LocalDateTime lastSeen = LocalDateTime.now();
+    private Boolean isTrusted = false;
 }
