@@ -10,7 +10,6 @@ import java.io.IOException;
 
 @WebServlet("/status")
 public class SimpleStatusServlet extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
