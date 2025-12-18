@@ -9,6 +9,10 @@ public class UserAccount{
     private String email;
     private String password;
     private String ADMIN;
-    
+    private String USER;
+    private String AUDITOR;
+    private String ACTIVE;
+    private String SUSPENDED;
+    private LocalDateTime;
 
 }
