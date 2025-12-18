@@ -20,4 +20,3 @@ public class ViolationRecord {
     private Boolean resolved = false;
     private LocalDateTime detectedAt = LocalDateTime.now();
 }
-9-+
