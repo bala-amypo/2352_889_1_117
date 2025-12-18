@@ -3,8 +3,10 @@ package com.example.demo.util;
 
 import com.example.demo.entity.*;
 import com.example.demo.repository.*;
+import org.springframework.stereotype.Component;
 import java.util.List;
 
+@Component   // ⭐ ADD THIS
 public class RuleEvaluationUtil {
 
     private final PolicyRuleRepository policyRepo;
