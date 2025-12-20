@@ -13,7 +13,7 @@ public class AuthController {
     private final JwtUtil jwtUtil;
 
     public AuthController() {
-        this.jwtUtil = new JwtUtil("test-secret", 3600000L, true);
+        this.jwtUtil = new JwtUtil("secret-key", 3600000L, true);
     }
 
     @PostMapping("/login")
@@ -24,6 +24,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register() {
-        return "User Registered";
+        return "Registered successfully";
     }
 }
