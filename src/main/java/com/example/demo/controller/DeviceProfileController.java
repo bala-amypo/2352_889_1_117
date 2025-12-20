@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.DeviceProfile;
 import com.example.demo.service.DeviceProfileService;
+import com.example.demo.repository.DeviceProfileRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +14,9 @@ public class DeviceProfileController {
 
     private final DeviceProfileService service;
 
-    public DeviceProfileController(DeviceProfileService service) {
-        this.service = service;
+    // NO constructor injection
+    public DeviceProfileController() {
+        this.service = new DeviceProfileService(null);
     }
 
     @PostMapping
