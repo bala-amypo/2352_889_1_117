@@ -16,5 +16,7 @@ public class DeviceProfile {
     private String deviceType;
     private String osVersion;
     private LocalDateTime lastSeen = LocalDateTime.now();
-    private Boolean isTrusted = false;
+    private Boolean isTrusted;
+
+    // getters & setters
 }
