@@ -13,8 +13,8 @@ public class PolicyRuleController {
 
     private final PolicyRuleService service;
 
-    public PolicyRuleController(PolicyRuleService service) {
-        this.service = service;
+    public PolicyRuleController() {
+        this.service = new PolicyRuleService(null);
     }
 
     @PostMapping

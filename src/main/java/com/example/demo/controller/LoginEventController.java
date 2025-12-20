@@ -13,8 +13,8 @@ public class LoginEventController {
 
     private final LoginEventService service;
 
-    public LoginEventController(LoginEventService service) {
-        this.service = service;
+    public LoginEventController() {
+        this.service = new LoginEventService(null, null);
     }
 
     @PostMapping("/record")

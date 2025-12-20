@@ -13,8 +13,8 @@ public class ViolationRecordController {
 
     private final ViolationRecordService service;
 
-    public ViolationRecordController(ViolationRecordService service) {
-        this.service = service;
+    public ViolationRecordController() {
+        this.service = new ViolationRecordService(null);
     }
 
     @PostMapping
