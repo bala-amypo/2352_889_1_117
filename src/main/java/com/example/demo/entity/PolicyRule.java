@@ -10,12 +10,13 @@ public class PolicyRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String ruleCode;
+
     private String description;
     private String severity;
-    private Boolean active = true;
+    private String conditionsJson;
+    private Boolean active;
 
-    public Long getId() { return id; }
-    public String getRuleCode() { return ruleCode; }
-    public String getSeverity() { return severity; }
+    // getters & setters
 }
