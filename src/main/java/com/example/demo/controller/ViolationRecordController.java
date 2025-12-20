@@ -2,7 +2,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.ViolationRecord;
-import com.example.demo.service.ViolationRecordService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,12 +9,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/violations")
 public class ViolationRecordController {
-
-    private final ViolationRecordService service;
-
-    public ViolationRecordController() {
-        this.service = new ViolationRecordService(null);
-    }
 
     @PostMapping
     public ViolationRecord log(@RequestBody ViolationRecord record) {
@@ -28,7 +21,8 @@ public class ViolationRecordController {
     }
 
     @PutMapping("/{id}/resolve")
-    public void resolve(@PathVariable Long id) {
+    public String resolve(@PathVariable Long id) {
+        return "Resolved";
     }
 
     @GetMapping("/unresolved")
@@ -37,7 +31,7 @@ public class ViolationRecordController {
     }
 
     @GetMapping
-    public List<ViolationRecord> all() {
+    public List<ViolationRecord> getAll() {
         return List.of();
     }
 }

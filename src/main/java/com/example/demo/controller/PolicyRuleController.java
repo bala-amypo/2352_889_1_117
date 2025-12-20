@@ -2,7 +2,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.PolicyRule;
-import com.example.demo.service.PolicyRuleService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,29 +10,24 @@ import java.util.List;
 @RequestMapping("/api/rules")
 public class PolicyRuleController {
 
-    private final PolicyRuleService service;
-
-    public PolicyRuleController() {
-        this.service = new PolicyRuleService(null);
-    }
-
     @PostMapping
     public PolicyRule create(@RequestBody PolicyRule rule) {
         return rule;
     }
 
     @PutMapping("/{id}")
-    public PolicyRule update(@PathVariable Long id, @RequestBody PolicyRule rule) {
+    public PolicyRule update(@PathVariable Long id,
+                             @RequestBody PolicyRule rule) {
         return rule;
     }
 
     @GetMapping("/active")
-    public List<PolicyRule> active() {
+    public List<PolicyRule> activeRules() {
         return List.of();
     }
 
     @GetMapping
-    public List<PolicyRule> all() {
+    public List<PolicyRule> getAll() {
         return List.of();
     }
 }
