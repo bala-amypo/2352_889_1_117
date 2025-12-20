@@ -1,37 +1,43 @@
 
 package com.example.demo.controller;
 
+import com.example.demo.entity.ViolationRecord;
+import com.example.demo.service.ViolationRecordService;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/violations")
-@Tag(name = "Violation Record Controller")
 public class ViolationRecordController {
 
+    private final ViolationRecordService service;
+
+    public ViolationRecordController(ViolationRecordService service) {
+        this.service = service;
+    }
+
     @PostMapping
-    public String logViolation(@RequestBody Object violation) {
-        return "Violation logged";
+    public ViolationRecord log(@RequestBody ViolationRecord record) {
+        return record;
     }
 
     @GetMapping("/user/{userId}")
-    public String getViolationsByUser(@PathVariable Long userId) {
-        return "Violations for user " + userId;
+    public List<ViolationRecord> byUser(@PathVariable Long userId) {
+        return List.of();
     }
 
     @PutMapping("/{id}/resolve")
-    public String resolveViolation(@PathVariable Long id) {
-        return "Violation resolved for ID " + id;
+    public void resolve(@PathVariable Long id) {
     }
 
     @GetMapping("/unresolved")
-    public String getUnresolvedViolations() {
-        return "Unresolved violations";
+    public List<ViolationRecord> unresolved() {
+        return List.of();
     }
 
     @GetMapping
-    public String getAllViolations() {
-        return "All violations";
+    public List<ViolationRecord> all() {
+        return List.of();
     }
 }

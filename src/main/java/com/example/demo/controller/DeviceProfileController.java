@@ -1,32 +1,38 @@
 
 package com.example.demo.controller;
 
+import com.example.demo.entity.DeviceProfile;
+import com.example.demo.service.DeviceProfileService;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/devices")
-@Tag(name = "Device Profile Controller")
 public class DeviceProfileController {
 
+    private final DeviceProfileService service;
+
+    public DeviceProfileController(DeviceProfileService service) {
+        this.service = service;
+    }
+
     @PostMapping
-    public String registerDevice(@RequestBody Object device) {
-        return "Device registered";
+    public DeviceProfile register(@RequestBody DeviceProfile device) {
+        return device;
     }
 
     @PutMapping("/{id}/trust")
-    public String updateTrust(@PathVariable Long id) {
-        return "Device trust updated for ID " + id;
+    public void updateTrust(@PathVariable Long id, @RequestParam boolean trust) {
     }
 
     @GetMapping("/user/{userId}")
-    public String getDevicesByUser(@PathVariable Long userId) {
-        return "Devices for user " + userId;
+    public List<DeviceProfile> getByUser(@PathVariable Long userId) {
+        return List.of();
     }
 
     @GetMapping("/lookup/{deviceId}")
-    public String getDeviceById(@PathVariable String deviceId) {
-        return "Device with ID " + deviceId;
+    public DeviceProfile findByDevice(@PathVariable String deviceId) {
+        return null;
     }
 }
