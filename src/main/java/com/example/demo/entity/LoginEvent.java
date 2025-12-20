@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class LoginEvent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private Long userId;

@@ -8,11 +8,14 @@ import java.time.LocalDateTime;
 public class DeviceProfile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private Long userId;
+
+    @Column(unique = true)
     private String deviceId;
+
     private String deviceType;
     private String osVersion;
     private LocalDateTime lastSeen = LocalDateTime.now();

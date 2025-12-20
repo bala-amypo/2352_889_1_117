@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class PolicyRule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @Column(unique = true)

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class ViolationRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private Long userId;
@@ -17,7 +17,7 @@ public class ViolationRecord {
     private String violationType;
     private String details;
     private String severity;
-    private LocalDateTime detectedAt = LocalDateTime.now();
+    private LocalDateTime detectedAt;
     private Boolean resolved = false;
 
     // getters & setters
