@@ -12,4 +12,12 @@ public class JwtUtil {
         this.validityInMs = validityInMs;
         this.isTestMode = isTestMode;
     }
+
+    public String generateToken(String username) {
+        return "test-token-" + username;
+    }
+
+    public String extractUsername(String token) {
+        return token.replace("test-token-", "");
+    }
 }
