@@ -20,5 +20,35 @@ public class ViolationRecord {
     private LocalDateTime detectedAt;
     private Boolean resolved = false;
 
-    // getters & setters
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setPolicyRuleId(Long policyRuleId) {
+        this.policyRuleId = policyRuleId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
+    public void setViolationType(String violationType) {
+        this.violationType = violationType;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
+
+    public void setDetectedAt(LocalDateTime detectedAt) {
+        this.detectedAt = detectedAt;
+    }
+
+    public void setResolved(Boolean resolved) {
+        this.resolved = resolved;
+    }
 }
