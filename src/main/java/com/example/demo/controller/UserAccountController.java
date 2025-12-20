@@ -13,8 +13,8 @@ public class UserAccountController {
 
     private final UserAccountService service;
 
-    public UserAccountController(UserAccountService service) {
-        this.service = service;
+    public UserAccountController() {
+        this.service = new UserAccountService(null);
     }
 
     @PostMapping
