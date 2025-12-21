@@ -2,6 +2,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.UserAccount;
+import com.example.demo.service.UserAccountService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,24 +11,30 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserAccountController {
 
-    @PostMapping
-    public UserAccount create(@RequestBody UserAccount user) {
-        return user;
+    UserAccountService userService;  
+
+    public UserAccountController(UserAccountService userService) {
+        this.userService = userService;
     }
 
+    @PostMapping
+    public UserAccount create(@RequestBody UserAccount user) {
+        return userService.createUser(user); 
+    }
+
+
     @GetMapping("/{id}")
-    public UserAccount getById(@PathVariable Long id) {
-        return null;
+    public UserAccount getUser(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
     @PutMapping("/{id}/status")
-    public String updateStatus(@PathVariable Long id,
-                               @RequestParam String status) {
-        return "Status updated";
+    public UserAccount updateStatus(@PathVariable Long id, @RequestParam String status) {
+        return userService.updateUserStatus(id, status);
     }
 
     @GetMapping
-    public List<UserAccount> getAll() {
-        return List.of();
+    public List<UserAccount> getAllUsers() {
+        return userService.getAllUsers();
     }
 }
