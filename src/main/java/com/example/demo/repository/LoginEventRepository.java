@@ -6,7 +6,6 @@ import com.example.demo.entity.LoginEvent;
 import java.util.List;
 
 public interface LoginEventRepository extends JpaRepository<LoginEvent, Long> {
-
-    // EXACT NAME REQUIRED
+    List<LoginEvent> findByUserId(Long userId);
     List<LoginEvent> findByUserIdAndLoginStatus(Long userId, String status);
 }
