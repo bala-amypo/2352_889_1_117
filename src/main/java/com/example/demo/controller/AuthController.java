@@ -1,29 +1,25 @@
 
 package com.example.demo.controller;
 
-import com.example.demo.dto.LoginRequest;
-import com.example.demo.dto.JwtResponse;
-import com.example.demo.security.JwtUtil;
+import com.example.demo.entity.UserAccount;
+import com.example.demo.service.UserAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final JwtUtil jwtUtil;
+    @Autowired
+    UserAccountService userService; 
 
-    public AuthController() {
-        this.jwtUtil = new JwtUtil("secret-key", 3600000L, true);
+    @PostMapping("/register")
+    public UserAccount register(@RequestBody UserAccount user) {
+        return userService.createUser(user);
     }
 
     @PostMapping("/login")
-    public JwtResponse login(@RequestBody LoginRequest request) {
-        String token = jwtUtil.generateToken(request.getUsername());
-        return new JwtResponse(token);
-    }
-
-    @PostMapping("/register")
-    public String register() {
-        return "Registered successfully";
+    public String login(@RequestBody UserAccount user) {
+        return "Login successful for user: " + user.getUsername();
     }
 }
