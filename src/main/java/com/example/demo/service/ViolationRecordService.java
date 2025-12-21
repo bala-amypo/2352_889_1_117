@@ -1,10 +1,13 @@
 
 package com.example.demo.service;
 
-import com.example.demo.repository.ViolationRecordRepository;
+import com.example.demo.entity.ViolationRecord;
+import java.util.List;
 
-public class ViolationRecordService {
-
-    public ViolationRecordService(ViolationRecordRepository repo) {
-    }
+public interface ViolationRecordService {
+    ViolationRecord logViolation(ViolationRecord violation);
+    List<ViolationRecord> getViolationsByUser(Long userId);
+    ViolationRecord markResolved(Long id);
+    List<ViolationRecord> getUnresolvedViolations();
+    List<ViolationRecord> getAllViolations();
 }
