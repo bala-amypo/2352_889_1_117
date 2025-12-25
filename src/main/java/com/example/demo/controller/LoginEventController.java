@@ -1,24 +1,24 @@
 
 package com.example.demo.controller;
 
-import com.example.demo.entity.LoginEvent;
-import com.example.demo.service.LoginEventService;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.example.demo.entity.LoginEvent;
+import com.example.demo.service.LoginEventService;
 
 @RestController
-@RequestMapping("/api/logins")
+@RequestMapping("/login-events")
 public class LoginEventController {
 
-    LoginEventService loginService;   
+    private final LoginEventService loginService;
 
     public LoginEventController(LoginEventService loginService) {
         this.loginService = loginService;
     }
 
-    @PostMapping("/record")
-    public LoginEvent recordLogin(@RequestBody LoginEvent event) {
+    @PostMapping
+    public LoginEvent record(@RequestBody LoginEvent event) {
         return loginService.recordLogin(event);
     }
 
@@ -27,13 +27,8 @@ public class LoginEventController {
         return loginService.getEventsByUser(userId);
     }
 
-    @GetMapping("/suspicious/{userId}")
+    @GetMapping("/user/{userId}/suspicious")
     public List<LoginEvent> getSuspicious(@PathVariable Long userId) {
         return loginService.getSuspiciousLogins(userId);
-    }
-
-    @GetMapping
-    public List<LoginEvent> getAll() {
-        return loginService.getAllEvents();
     }
 }
