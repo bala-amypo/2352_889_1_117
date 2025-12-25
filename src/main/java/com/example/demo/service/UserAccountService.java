@@ -6,15 +6,15 @@ import com.example.demo.entity.UserAccount;
 
 public interface UserAccountService {
 
-    // Create a new user
+    // used by AuthController
+    UserAccount register(String username, String password);
+
+    // used by UserAccountController
     UserAccount createUser(UserAccount user);
 
-    // Get user by ID
     UserAccount getUserById(Long id);
 
-    // Get all users
     List<UserAccount> getAllUsers();
 
-    // Update user status (ACTIVE / SUSPENDED)
     UserAccount updateUserStatus(Long id, String status);
 }
