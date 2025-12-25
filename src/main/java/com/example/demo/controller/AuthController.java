@@ -1,25 +1,20 @@
 
 package com.example.demo.controller;
 
-import com.example.demo.entity.UserAccount;
-import com.example.demo.service.UserAccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.service.UserAccountService;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
-    UserAccountService userService; 
+    private UserAccountService userService;
 
     @PostMapping("/register")
-    public UserAccount register(@RequestBody UserAccount user) {
-        return userService.createUser(user);
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestBody UserAccount user) {
-        return "Login successful for user: " + user.getUsername();
+    public String register(@RequestParam String username,
+                           @RequestParam String password) {
+        return userService.register(username, password);
     }
 }
