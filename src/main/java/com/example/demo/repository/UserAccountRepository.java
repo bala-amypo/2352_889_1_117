@@ -8,7 +8,7 @@ import com.example.demo.entity.UserAccount;
 
 @Repository
 public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
-    UserAccount save(UserAccount u);
+     UserAccount save(UserAccount u);
     Optional<UserAccount> findById(Long id);
     List<UserAccount> findAll();
 }
