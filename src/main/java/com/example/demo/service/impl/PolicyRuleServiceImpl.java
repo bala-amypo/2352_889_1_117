@@ -1,36 +1,34 @@
 
-
-// PolicyRuleServiceImpl.java
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.PolicyRule;
 import com.example.demo.repository.PolicyRuleRepository;
 import com.example.demo.service.PolicyRuleService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class PolicyRuleServiceImpl implements PolicyRuleService {
-    
-    private final PolicyRuleRepository repository;
-    
-    public PolicyRuleServiceImpl(PolicyRuleRepository repository) {
-        this.repository = repository;
+
+    private final PolicyRuleRepository ruleRepo;
+
+    public PolicyRuleServiceImpl(PolicyRuleRepository ruleRepo) {
+        this.ruleRepo = ruleRepo;
     }
-    
+
     @Override
-    public PolicyRule createRule(PolicyRule rule) {
-        return repository.save(rule);
+    public PolicyRule createRule(PolicyRule r) {
+        return ruleRepo.save(r);
     }
-    
-    @Override
-    public List<PolicyRule> getActiveRules() {
-        return repository.findByActiveTrue();
-    }
-    
+
     @Override
     public List<PolicyRule> getAllRules() {
-        return repository.findAll();
+        return ruleRepo.findAll();
+    }
+
+    @Override
+    public List<PolicyRule> getActiveRules() {
+        return ruleRepo.findByActiveTrue();
     }
 }
-

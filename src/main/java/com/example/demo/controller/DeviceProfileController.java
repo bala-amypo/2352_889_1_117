@@ -1,6 +1,4 @@
 
-
-// DeviceProfileController.java
 package com.example.demo.controller;
 
 import com.example.demo.entity.DeviceProfile;
@@ -8,29 +6,26 @@ import com.example.demo.service.DeviceProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/api/devices")
+@RequestMapping("/devices")
 public class DeviceProfileController {
-    
-    private final DeviceProfileService service;
-    
-    public DeviceProfileController(DeviceProfileService service) {
-        this.service = service;
+
+    private final DeviceProfileService deviceService;
+
+    public DeviceProfileController(DeviceProfileService deviceService) {
+        this.deviceService = deviceService;
     }
-    
-    @PostMapping
-    public ResponseEntity<DeviceProfile> register(@RequestBody DeviceProfile device) {
-        return ResponseEntity.ok(service.registerDevice(device));
+
+    @PostMapping("/register")
+    public ResponseEntity<DeviceProfile> register(@RequestBody DeviceProfile d) {
+        return ResponseEntity.ok(deviceService.registerDevice(d));
     }
-    
-    @GetMapping("/{deviceId}")
+
+    @GetMapping("/lookup/{deviceId}")
     public ResponseEntity<DeviceProfile> lookup(@PathVariable String deviceId) {
-        return ResponseEntity.ok(service.findByDeviceId(deviceId).orElse(null));
-    }
-    
-    @PutMapping("/{id}/trust")
-    public ResponseEntity<DeviceProfile> updateTrust(@PathVariable Long id, @RequestParam Boolean trusted) {
-        return ResponseEntity.ok(service.updateTrustStatus(id, trusted));
+        Optional<DeviceProfile> d = deviceService.findByDeviceId(deviceId);
+        return ResponseEntity.of(d);
     }
 }
-

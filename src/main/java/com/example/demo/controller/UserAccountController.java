@@ -1,5 +1,4 @@
 
-// UserAccountController.java
 package com.example.demo.controller;
 
 import com.example.demo.entity.UserAccount;
@@ -10,33 +9,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserAccountController {
-    
-    private final UserAccountService service;
-    
-    public UserAccountController(UserAccountService service) {
-        this.service = service;
+
+    private final UserAccountService userService;
+
+    public UserAccountController(UserAccountService userService) {
+        this.userService = userService;
     }
-    
-    @PostMapping
-    public ResponseEntity<UserAccount> create(@RequestBody UserAccount user) {
-        return ResponseEntity.ok(service.createUser(user));
+
+    @PostMapping("/create")
+    public ResponseEntity<UserAccount> create(@RequestBody UserAccount u) {
+        return ResponseEntity.ok(userService.createUser(u));
     }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<UserAccount> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getUserById(id));
-    }
-    
-    @GetMapping
-    public ResponseEntity<List<UserAccount>> getAll() {
-        return ResponseEntity.ok(service.getAllUsers());
-    }
-    
-    @PutMapping("/{id}/status")
-    public ResponseEntity<UserAccount> updateStatus(@PathVariable Long id, @RequestParam String status) {
-        return ResponseEntity.ok(service.updateUserStatus(id, status));
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserAccount>> all() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 }
-
