@@ -1,10 +1,13 @@
 
 package com.example.demo.controller;
 
-import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.entity.UserAccount;
 import com.example.demo.service.UserAccountService;
 
+@RestController
+@RequestMapping("/users")
 public class UserAccountController {
 
     private final UserAccountService service;
@@ -13,7 +16,8 @@ public class UserAccountController {
         this.service = service;
     }
 
-    public ResponseEntity<UserAccount> create(UserAccount u) {
-        return ResponseEntity.ok(service.createUser(u));
+    @PostMapping
+    public UserAccount createUser(@RequestBody UserAccount user) {
+        return service.createUser(user);
     }
 }
