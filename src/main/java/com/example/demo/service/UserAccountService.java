@@ -1,5 +1,4 @@
 
-// UserAccountService.java
 package com.example.demo.service;
 
 import com.example.demo.entity.UserAccount;
@@ -11,4 +10,3 @@ public interface UserAccountService {
     UserAccount updateUserStatus(Long id, String status);
     List<UserAccount> getAllUsers();
 }
-
