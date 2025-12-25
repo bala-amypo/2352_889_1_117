@@ -5,14 +5,14 @@ import java.util.*;
 import com.example.demo.entity.UserAccount;
 import com.example.demo.repository.UserAccountRepository;
 import com.example.demo.service.UserAccountService;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.example.demo.security.SimplePasswordEncoder;
 
 public class UserAccountServiceImpl implements UserAccountService {
 
     private final UserAccountRepository repo;
-    private final PasswordEncoder encoder;
+    private final SimplePasswordEncoder encoder;
 
-    public UserAccountServiceImpl(UserAccountRepository repo, PasswordEncoder encoder) {
+    public UserAccountServiceImpl(UserAccountRepository repo, SimplePasswordEncoder encoder) {
         this.repo = repo;
         this.encoder = encoder;
     }
