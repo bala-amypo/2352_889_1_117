@@ -1,23 +1,58 @@
 
 package com.example.demo.security;
 
+import io.jsonwebtoken.*;
+import java.util.Date;
+
 public class JwtUtil {
 
-    private final boolean testMode;
+    private final String secret;
+    private final long expiration;
+    private final boolean enabled;
 
-    public JwtUtil(String secret, long validity, boolean testMode) {
-        this.testMode = testMode;
+    public JwtUtil(String secret, long expiration, boolean enabled) {
+        this.secret = secret;
+        this.expiration = expiration;
+        this.enabled = enabled;
     }
 
-    public String generateToken(String subject, Long userId, String email, String role) {
-        return "test.jwt.token";
+    public String generateToken(String username, Long userId, String email, String role) {
+        return Jwts.builder()
+                .setSubject(username)
+                .claim("userId", userId)
+                .claim("email", email)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
     }
 
     public boolean validateToken(String token) {
-        return testMode && !"invalid.token.value".equals(token);
+        try {
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public String getEmail(String token) { return "test@mail.com"; }
-    public String getRole(String token) { return "USER"; }
-    public Long getUserId(String token) { return 1L; }
+    public String getEmail(String token) {
+        return getClaims(token).get("email", String.class);
+    }
+
+    public String getRole(String token) {
+        return getClaims(token).get("role", String.class);
+    }
+
+    public Long getUserId(String token) {
+        return getClaims(token).get("userId", Long.class);
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
+    }
 }
