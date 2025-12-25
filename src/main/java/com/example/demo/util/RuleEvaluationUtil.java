@@ -8,55 +8,35 @@ import com.example.demo.repository.PolicyRuleRepository;
 import com.example.demo.repository.ViolationRecordRepository;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
 public class RuleEvaluationUtil {
-    
-    private final PolicyRuleRepository ruleRepository;
-    private final ViolationRecordRepository violationRepository;
-    
-    public RuleEvaluationUtil(PolicyRuleRepository ruleRepository, 
-                              ViolationRecordRepository violationRepository) {
-        this.ruleRepository = ruleRepository;
-        this.violationRepository = violationRepository;
+
+    private final PolicyRuleRepository ruleRepo;
+    private final ViolationRecordRepository violationRepo;
+
+    public RuleEvaluationUtil(PolicyRuleRepository ruleRepo, ViolationRecordRepository violationRepo) {
+        this.ruleRepo = ruleRepo;
+        this.violationRepo = violationRepo;
     }
-    
+
     public void evaluateLoginEvent(LoginEvent event) {
-        List<PolicyRule> activeRules = ruleRepository.findByActiveTrue();
-        
+        List<PolicyRule> activeRules = ruleRepo.findByActiveTrue();
+
         for (PolicyRule rule : activeRules) {
-            if (ruleMatches(rule, event)) {
-                logViolation(rule, event);
+            if (rule.getConditionsJson() != null &&
+                event.getLoginStatus() != null &&
+                event.getLoginStatus().contains(rule.getConditionsJson())) {
+
+                ViolationRecord v = new ViolationRecord();
+                v.setUserId(event.getUserId());
+                v.setEventId(event.getId());
+                v.setSeverity(rule.getSeverity());
+                v.setDetails("Rule " + rule.getRuleCode() + " triggered");
+                v.setResolved(false);
+                violationRepo.save(v);
             }
         }
-    }
-    
-    private boolean ruleMatches(PolicyRule rule, LoginEvent event) {
-        if (rule.getConditionsJson() == null) {
-            return false;
-        }
-        
-        String conditions = rule.getConditionsJson();
-        
-        // Simple condition matching based on login status
-        if (conditions.contains("FAILED") && "FAILED".equals(event.getLoginStatus())) {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    private void logViolation(PolicyRule rule, LoginEvent event) {
-        ViolationRecord violation = new ViolationRecord();
-        violation.setUserId(event.getUserId());
-        violation.setEventId(event.getId());
-        violation.setSeverity(rule.getSeverity());
-        violation.setDetails("Rule violation: " + rule.getRuleCode());
-        violation.setResolved(false);
-        violation.setCreatedAt(LocalDateTime.now());
-        
-        violationRepository.save(violation);
     }
 }
