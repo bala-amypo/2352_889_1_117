@@ -1,7 +1,6 @@
 
 package com.example.demo.security;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class JwtUtil {
@@ -14,13 +13,13 @@ public class JwtUtil {
         this.expiration = expiration;
     }
 
-    // token format: username|userId|email|role
+    // token format expected by tests
+    // username:userId:email:role
     public String generateToken(String username, Long userId,
                                 String email, String role) {
 
-        String raw = username + "|" + userId + "|" + email + "|" + role;
-        return Base64.getEncoder()
-                .encodeToString(raw.getBytes(StandardCharsets.UTF_8));
+        String value = username + ":" + userId + ":" + email + ":" + role;
+        return Base64.getEncoder().encodeToString(value.getBytes());
     }
 
     public boolean validateToken(String token) {
@@ -33,11 +32,8 @@ public class JwtUtil {
     }
 
     private String[] decode(String token) {
-        String decoded = new String(
-                Base64.getDecoder().decode(token),
-                StandardCharsets.UTF_8
-        );
-        return decoded.split("\\|");
+        String decoded = new String(Base64.getDecoder().decode(token));
+        return decoded.split(":");
     }
 
     public String getEmail(String token) {
@@ -49,6 +45,6 @@ public class JwtUtil {
     }
 
     public Long getUserId(String token) {
-        return Long.valueOf(decode(token)[1]);
+        return Long.parseLong(decode(token)[1]);
     }
 }
