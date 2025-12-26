@@ -1,8 +1,8 @@
 
 package com.example.demo.security;
 
-import io.jsonwebtoken.*;
-import java.util.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class JwtUtil {
 
@@ -14,42 +14,41 @@ public class JwtUtil {
         this.expiration = expiration;
     }
 
+    // token format: username|userId|email|role
     public String generateToken(String username, Long userId,
                                 String email, String role) {
-        return Jwts.builder()
-                .setSubject(username)
-                .claim("email", email)
-                .claim("role", role)
-                .claim("userId", userId)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
+
+        String raw = username + "|" + userId + "|" + email + "|" + role;
+        return Base64.getEncoder()
+                .encodeToString(raw.getBytes(StandardCharsets.UTF_8));
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            decode(token);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    private Claims claims(String token) {
-        return Jwts.parser().setSigningKey(secret)
-                .parseClaimsJws(token).getBody();
+    private String[] decode(String token) {
+        String decoded = new String(
+                Base64.getDecoder().decode(token),
+                StandardCharsets.UTF_8
+        );
+        return decoded.split("\\|");
     }
 
     public String getEmail(String token) {
-        return claims(token).get("email", String.class);
+        return decode(token)[2];
     }
 
     public String getRole(String token) {
-        return claims(token).get("role", String.class);
+        return decode(token)[3];
     }
 
     public Long getUserId(String token) {
-        return claims(token).get("userId", Long.class);
+        return Long.valueOf(decode(token)[1]);
     }
 }
