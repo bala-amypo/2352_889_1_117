@@ -1,16 +1,35 @@
 
 package com.example.demo.controller;
 
-import com.example.demo.entity.*;
-import com.example.demo.service.*;
-import org.springframework.http.*;
+import com.example.demo.entity.PolicyRule;
+import com.example.demo.service.PolicyRuleService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RestController
+@RequestMapping("/rules")
 public class PolicyRuleController {
+
     private final PolicyRuleService service;
+
     public PolicyRuleController(PolicyRuleService service) {
         this.service = service;
     }
-    public ResponseEntity<java.util.List<PolicyRule>> all() {
+
+    @PostMapping
+    public ResponseEntity<PolicyRule> create(@RequestBody PolicyRule rule) {
+        return ResponseEntity.ok(service.createRule(rule));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PolicyRule>> all() {
         return ResponseEntity.ok(service.getAllRules());
+    }
+
+    @GetMapping("/active")
+    public ResponseEntity<List<PolicyRule>> activeRules() {
+        return ResponseEntity.ok(service.getActiveRules());
     }
 }
