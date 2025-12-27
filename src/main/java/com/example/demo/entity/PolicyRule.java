@@ -1,7 +1,7 @@
 
 package com.example.demo.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "policy_rules")
