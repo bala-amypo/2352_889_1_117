@@ -15,7 +15,7 @@ public class JwtUtil {
     private final Key key;
     
     public JwtUtil() {
-        this("DefaultSecretKeyForJWT1234567890", 3600000L, false);
+        this("TestSecretKeyForJWT1234567890ABCDEFGHIJKLMNOP", 3600000L, false);
     }
     
     public JwtUtil(String secret, long validityInMs, boolean isTestMode) {
