@@ -1,36 +1,30 @@
 
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.DeviceProfile;
-import com.example.demo.repository.DeviceProfileRepository;
-import com.example.demo.service.DeviceProfileService;
-import org.springframework.stereotype.Service;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
+import com.example.demo.service.*;
+import java.util.*;
 
-import java.util.Optional;
-
-@Service   // ⭐ REQUIRED
 public class DeviceProfileServiceImpl implements DeviceProfileService {
 
-    private final DeviceProfileRepository repository;
+    private final DeviceProfileRepository repo;
 
-    public DeviceProfileServiceImpl(DeviceProfileRepository repository) {
-        this.repository = repository;
+    public DeviceProfileServiceImpl(DeviceProfileRepository repo) {
+        this.repo = repo;
     }
 
-    @Override
-    public DeviceProfile registerDevice(DeviceProfile device) {
-        return repository.save(device);
+    public DeviceProfile registerDevice(DeviceProfile d) {
+        return repo.save(d);
     }
 
-    @Override
-    public Optional<DeviceProfile> findByDeviceId(String deviceId) {
-        return repository.findByDeviceId(deviceId);
+    public Optional<DeviceProfile> findByDeviceId(String id) {
+        return repo.findByDeviceId(id);
     }
 
-    @Override
-    public DeviceProfile updateTrustStatus(Long id, boolean trusted) {
-        DeviceProfile d = repository.findById(id).orElseThrow();
+    public DeviceProfile updateTrustStatus(Long id, Boolean trusted) {
+        DeviceProfile d = repo.findById(id).orElse(null);
         d.setIsTrusted(trusted);
-        return repository.save(d);
+        return repo.save(d);
     }
 }
