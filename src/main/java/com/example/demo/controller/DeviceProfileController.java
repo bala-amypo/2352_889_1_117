@@ -1,43 +1,43 @@
-package com.example.demo.controller;
+// package com.example.demo.controller;
 
-import com.example.demo.entity.DeviceProfile;
-import com.example.demo.service.DeviceProfileService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+// import com.example.demo.entity.DeviceProfile;
+// import com.example.demo.service.DeviceProfileService;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+// import java.util.List;
 
-@RestController
-@RequestMapping("/api/devices")
-public class DeviceProfileController {
+// @RestController
+// @RequestMapping("/api/devices")
+// public class DeviceProfileController {
 
-    private final DeviceProfileService deviceService;
+//     private final DeviceProfileService deviceService;
 
-    public DeviceProfileController(DeviceProfileService deviceService) {
-        this.deviceService = deviceService;
-    }
+//     public DeviceProfileController(DeviceProfileService deviceService) {
+//         this.deviceService = deviceService;
+//     }
 
-    @PostMapping
-    public ResponseEntity<DeviceProfile> register(@RequestBody DeviceProfile device) {
-        return ResponseEntity.ok(deviceService.registerDevice(device));
-    }
+//     @PostMapping
+//     public ResponseEntity<DeviceProfile> register(@RequestBody DeviceProfile device) {
+//         return ResponseEntity.ok(deviceService.registerDevice(device));
+//     }
 
-    @PutMapping("/{id}/trust")
-    public ResponseEntity<DeviceProfile> updateTrust(
-            @PathVariable Long id,
-            @RequestParam boolean trust) {
-        return ResponseEntity.ok(deviceService.updateTrustStatus(id, trust));
-    }
+//     @PutMapping("/{id}/trust")
+//     public ResponseEntity<DeviceProfile> updateTrust(
+//             @PathVariable Long id,
+//             @RequestParam boolean trust) {
+//         return ResponseEntity.ok(deviceService.updateTrustStatus(id, trust));
+//     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<DeviceProfile>> getByUser(@PathVariable Long userId) {
-        return ResponseEntity.ok(deviceService.getDevicesByUser(userId));
-    }
+//     @GetMapping("/user/{userId}")
+//     public ResponseEntity<List<DeviceProfile>> getByUser(@PathVariable Long userId) {
+//         return ResponseEntity.ok(deviceService.getDevicesByUser(userId));
+//     }
 
-    @GetMapping("/lookup/{deviceId}")
-    public ResponseEntity<DeviceProfile> lookup(@PathVariable String deviceId) {
-        return ResponseEntity.ok(
-                deviceService.findByDeviceId(deviceId).orElse(null)
-        );
-    }
-}
+//     @GetMapping("/lookup/{deviceId}")
+//     public ResponseEntity<DeviceProfile> lookup(@PathVariable String deviceId) {
+//         return ResponseEntity.ok(
+//                 deviceService.findByDeviceId(deviceId).orElse(null)
+//         );
+//     }
+// }
