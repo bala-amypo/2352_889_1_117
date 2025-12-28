@@ -35,6 +35,8 @@
 //         return ResponseEntity.ok(deviceService.findByDeviceId(deviceId).orElse(null));
 //     }
 // }
+
+
 package com.example.demo.controller;
 
 import com.example.demo.entity.*;
@@ -50,6 +52,5 @@ public class DeviceProfileController {
         return ResponseEntity.ok(service.findByDeviceId(id).orElse(null));
     }
 }
-
 
 
