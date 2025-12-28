@@ -1,5 +1,4 @@
-
-package com.example.demo.controller;
+//* package com.example.demo.controller;
 
 import com.example.demo.entity.DeviceProfile;
 import com.example.demo.service.DeviceProfileService;
