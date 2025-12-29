@@ -1,39 +1,39 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.entity.LoginEvent;
-// import com.example.demo.service.LoginEventService;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.LoginEvent;
+import com.example.demo.service.LoginEventService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-// import java.util.List;
+import java.util.List;
 
-// @RestController
-// @RequestMapping("/api/logins")
-// public class LoginEventController {
+@RestController
+@RequestMapping("/api/logins")
+public class LoginEventController {
 
-//     private final LoginEventService loginService;
+    private final LoginEventService loginService;
 
-//     public LoginEventController(LoginEventService loginService) {
-//         this.loginService = loginService;
-//     }
+    public LoginEventController(LoginEventService loginService) {
+        this.loginService = loginService;
+    }
 
-//     @PostMapping("/record")
-//     public ResponseEntity<LoginEvent> record(@RequestBody LoginEvent event) {
-//         return ResponseEntity.ok(loginService.recordLogin(event));
-//     }
+    @PostMapping("/record")
+    public ResponseEntity<LoginEvent> record(@RequestBody LoginEvent event) {
+        return ResponseEntity.ok(loginService.recordLogin(event));
+    }
 
-//     @GetMapping("/user/{userId}")
-//     public ResponseEntity<List<LoginEvent>> getByUser(@PathVariable Long userId) {
-//         return ResponseEntity.ok(loginService.getEventsByUser(userId));
-//     }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<LoginEvent>> getByUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(loginService.getEventsByUser(userId));
+    }
 
-//     @GetMapping("/suspicious/{userId}")
-//     public ResponseEntity<List<LoginEvent>> getSuspicious(@PathVariable Long userId) {
-//         return ResponseEntity.ok(loginService.getSuspiciousLogins(userId));
-//     }
+    @GetMapping("/suspicious/{userId}")
+    public ResponseEntity<List<LoginEvent>> getSuspicious(@PathVariable Long userId) {
+        return ResponseEntity.ok(loginService.getSuspiciousLogins(userId));
+    }
 
-//     @GetMapping
-//     public ResponseEntity<List<LoginEvent>> getAll() {
-//         return ResponseEntity.ok(loginService.getAllEvents());
-//     }
-// }
+    @GetMapping
+    public ResponseEntity<List<LoginEvent>> getAll() {
+        return ResponseEntity.ok(loginService.getAllEvents());
+    }
+}
