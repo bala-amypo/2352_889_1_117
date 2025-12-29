@@ -1,15 +1,15 @@
 
-package com.example.demo.dto;
+// package com.example.demo.dto;
 
-public class LoginRequest {
-    private String usernameOrEmail;
-    private String password;
+// public class LoginRequest {
+//     private String usernameOrEmail;
+//     private String password;
     
-    public LoginRequest() {}
+//     public LoginRequest() {}
     
-    public String getUsernameOrEmail() { return usernameOrEmail; }
-    public void setUsernameOrEmail(String usernameOrEmail) { this.usernameOrEmail = usernameOrEmail; }
+//     public String getUsernameOrEmail() { return usernameOrEmail; }
+//     public void setUsernameOrEmail(String usernameOrEmail) { this.usernameOrEmail = usernameOrEmail; }
     
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-}
+//     public String getPassword() { return password; }
+//     public void setPassword(String password) { this.password = password; }
+// }
